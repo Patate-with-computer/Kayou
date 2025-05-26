@@ -1,0 +1,6 @@
+160:32-50:enemy.png
+32:320-10:enemy.png
+
+256:96-10:enemy.png
+256:192-100:tentacule.png
+256:256-20:enemy.png

@@ -1,0 +1,5 @@
+20:60-10.0:mob.png
+300:180-30.0:mob.png
+260:340-10.0:mob.png
+380:340-50.0:mob.png
+# x:y - life:texture name
