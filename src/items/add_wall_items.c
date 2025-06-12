@@ -6,9 +6,10 @@
 */
 
 #include <stdlib.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "items.h"
 #include "map.h"
+#include "lib.h"
 
 size_t randint(size_t max)
 {
@@ -25,6 +26,7 @@ void add_items_wall(wall_t **anc_wall, game_assets_t *win, sfVector2f pos)
     if (wall == NULL)
         return;
     wall->item = init_an_items(rand_item, (float)to_add, win->text_pack);
+    wall->item->anc_time = get_millis(win->csfml.clock);
     wall->object = IS_ITEM;
     add_wall(anc_wall, wall);
 }
@@ -39,5 +41,6 @@ void add_specific_item(game_assets_t *win, size_t text_nb,
         return;
     wall->item = init_an_items(text_nb, 10, win->text_pack);
     wall->object = IS_ITEM;
+    wall->item->anc_time = get_millis(win->csfml.clock);
     add_wall(&win->entities.wall, wall);
 }

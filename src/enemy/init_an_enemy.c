@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include <string.h>
 #include "enemy.h"
 #include "map.h"
@@ -28,9 +29,9 @@ void add_an_enemy(size_t nb_en, sfVector2f pos,
     enemy->enemy->anc_time = 0.0;
     enemy->enemy->anc_time_move = get_millis(win->csfml.clock);
     enemy->object = IS_ENEMY;
-    enemy->enemy->angle = 0;
     enemy->enemy->wait_time =
         enemy_attack_list[nb_en].reload_time + randint(MAX_TIME_ADD_TO_WAIT);
     set_texture_and_var(enemy->enemy, life, win->text_pack, enemy->texture);
+    enemy->enemy->angle = (float)randint(360) * M_PI / 180.0;
     add_wall(&win->entities.wall, enemy);
 }

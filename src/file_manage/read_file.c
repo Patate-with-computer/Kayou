@@ -9,7 +9,7 @@
 #include "file_manage.h"
 #include "map.h"
 #include "player.h"
-#include "type.h"
+#include "wolf/type.h"
 #include "texture_pack.h"
 
 void add_wall(wall_t **anc_wal, wall_t *new_wall)

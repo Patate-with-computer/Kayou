@@ -6,7 +6,7 @@
 */
 
 #include <stddef.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "map.h"
 
 void add_breakable_array(game_assets_t *win,

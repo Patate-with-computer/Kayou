@@ -32,12 +32,13 @@ typedef struct save_manage_s {
     size_t actual_room;
     float money;
     float magic;
+    float timer;
 } save_manage_t;
 
 static const save_manage_t default_save = {
     {true, 0, 0, 0}, 0, {200.0, 40.0},
     DEFAULT_LIFE, DEFAULT_ROOM,
-    DEFAULT_MONEY, DEFAULT_MAGIC
+    DEFAULT_MONEY, DEFAULT_MAGIC, 0.0f
 };
 
 void write_a_save(game_assets_t *assets, size_t nb_save);

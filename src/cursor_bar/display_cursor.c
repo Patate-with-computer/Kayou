@@ -6,7 +6,7 @@
 */
 
 #include "cursor_bar.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 
 static void set_vertext(sfVertex vertex[4], game_assets_t *win,
     sfVector2f pos)

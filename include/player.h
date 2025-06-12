@@ -9,7 +9,7 @@
     #define PLAYER_H
     #include <SFML/Graphics.h>
     #include <stdbool.h>
-    #include "type.h"
+    #include "wolf/type.h"
     #define POS(a, b) (POS##_##a##_##b)
     #define POS_Y_TOADD 400
     #define POS_TARGET_TOADD 390
@@ -33,7 +33,7 @@
     #define SUS_CHECK_WALL 3.0
     #define NB_WEAPON 4
     #define CAM_SENS 0.005f
-    #define MOVE_SENS 0.3f
+    #define JOY_SENS 4.2f
     #define MAX_ANGLE_LIGHT 30.0f
 
 // weapon reload
@@ -127,6 +127,7 @@ typedef struct player_s {
     wall_t *weapon[NB_WEAPON];
     bool get_weapon[NB_WEAPON];
     wall_t *wall_to_break;
+    wall_t *wall_to_lock;
     size_t weapon_name;
     float anc_time;
     float arrondie;
@@ -155,5 +156,7 @@ void move_to_a_pos(game_assets_t *win, float to_add,
     bool neg, float speed);
 sfBool check_weapon_exist(player_t *player);
 bool break_wall(player_t *pl, game_assets_t *win, wall_t *weapon);
+char *get_timer_str(game_assets_t *win);
+void set_lock_wall(game_assets_t *win);
 
 #endif

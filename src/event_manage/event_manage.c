@@ -5,7 +5,7 @@
 ** event_manage.c
 */
 
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "player.h"
 #include "event_manage.h"
 #include "enemy.h"
@@ -22,8 +22,10 @@ sfBool get_key_attack(void)
 
 sfBool get_confirm_key(void)
 {
-    return sfMouse_isButtonPressed(sfMouseLeft) ||
-        get_joy_button(0, BUTTON_CIRCLE);
+    if (sfJoystick_isConnected(0))
+        return get_joy_button(0, BUTTON_CIRCLE);
+    else
+        return sfMouse_isButtonPressed(sfMouseLeft);
 }
 
 void space_event(game_assets_t *window)
@@ -123,6 +125,9 @@ void event_manage(game_assets_t *win)
         if (win->event.type == sfEvtClosed || win->win_type == EXIT_MENU) {
             sfRenderWindow_close(win->csfml.win);
         }
+        if (win->event.type == sfEvtJoystickButtonPressed &&
+            win->win_type == CREDITS_MENU)
+            win->win_type = MAIN_MENU;
     }
     manage_maze_menu(win);
     if (win->win_type == CREDITS_MENU) {

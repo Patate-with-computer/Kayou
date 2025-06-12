@@ -9,7 +9,7 @@
 #include <string.h>
 #include <math.h>
 #include "enemy.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "map.h"
 #include "player.h"
 #include "texture_pack.h"

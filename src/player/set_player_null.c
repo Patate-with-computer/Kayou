@@ -13,6 +13,7 @@ void null_player_struct(void *to_null)
     player_t *player = (player_t *)to_null;
 
     player->wall_to_break = NULL;
+    player->wall_to_lock = NULL;
     for (size_t i = 0; i < NB_WEAPON; ++i) {
         player->get_weapon[i] = false;
         player->weapon[i] = NULL;

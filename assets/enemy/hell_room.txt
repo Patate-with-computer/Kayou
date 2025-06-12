@@ -2,6 +2,8 @@
 180:180-100.0:enemy.png
 240:260-100.0:enemy.png
 60:420-100.0:enemy.png
+200:420-70.0:enemy.png
+200:280-70.0:enemy.png
 #part 2
 320:20-100.0:enemy.png
 580:100-100.0:tentacule.png
@@ -15,4 +17,7 @@
 20:640-100.0:mob.png
 400:760-100.0:tentacule.png
 600:760-100.0:tentacule.png
+# wood
+400:400-50.0:wood.png
+80:760-50.0:wood.png
 # x:y - life:texture name

@@ -12,6 +12,7 @@ const char *enemy_texture_name[] = {
     "tentacule.png",
     "mob.png",
     "cheat.png",
+    "wood.png",
     NULL
 };
 
@@ -19,6 +20,16 @@ const char *items_texture_name[] = {
     "money.png",
     "ruby.png",
     "trois.png",
+    "baril.png",
+    "explosion.png",
+    "pnj.png",
+    "pnj2.png",
+    "pnj3.png",
+    "tentacule.png",
+    "pot_de_fleur.png",
+    "blood1.png",
+    "blood2.png",
+    "brick.png",
     NULL
 };
 
@@ -36,6 +47,7 @@ const char *wall_texture_name[] = {
     "text_sprite.png",
     "credits.jpg",
     "background.png",
+    "text_panneau.png",
     NULL
 };
 
@@ -56,5 +68,6 @@ const char *attack_texture_name[] = {
     "fireball_blue.png",
     "fireball.png",
     "fireball_black.png",
+    "fireball.png",
     NULL
 };

@@ -1,0 +1,17 @@
+40:200-100.0:enemy.png
+120:320-100.0:enemy.png
+280:440-100.0:tentacule.png
+260:280-100.0:enemy.png
+380:40-100.0:tentacule.png
+440:200-100.0:mob.png
+620:220-100.0:wood.png
+520:340-100.0:enemy.png
+580:400-100.0:tentacule.png
+520:640-100.0:wood.png
+540:640-100.0:wood.png
+320:120-100.0:wood.png
+200:200-100.0:wood.png
+400:520-100.0:enemy.png
+320:640-100.0:tentacule.png
+140:640-100.0:enemy.png
+140:560-100.0:enemy.png

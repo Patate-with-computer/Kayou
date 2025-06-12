@@ -33,6 +33,8 @@ void remove_wall(wall_t **wall, wall_t *enemy)
 
 #include "items.h"
 #include "player.h"
+#include "texture_pack.h"
+#include "screen_text.h"
 bool remove_life(wall_t **wall, wall_t *enemy, game_assets_t *win)
 {
     if (!enemy->enemy->is_touch && enemy->enemy->prev_touch)
@@ -44,6 +46,7 @@ bool remove_life(wall_t **wall, wall_t *enemy, game_assets_t *win)
         enemy->enemy->life -= enemy->enemy->life_to_rm;
         if (enemy->enemy->life <= 0) {
             add_items_wall(wall, win, enemy->pos1);
+            add_specific_item(win, I_BLOOD, enemy->pos1);
             play_song(win, SG_DEAD, enemy->pos1);
             remove_wall(wall, enemy);
             return true;

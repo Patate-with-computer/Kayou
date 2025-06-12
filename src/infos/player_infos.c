@@ -5,10 +5,11 @@
 ** player_infos.c
 */
 
+#include <string.h>
 #include "map.h"
 #include "player.h"
 #include "texture_pack.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 
 void print_ath(game_assets_t *win)
 {
@@ -27,5 +28,7 @@ void print_ath(game_assets_t *win)
     to_add = print_one_text(win->entities.player->magic, "Mana",
         (sfVector2f){to_add + TO_ADD_ATH, -TO_ADD_ATH}, win);
     to_add = print_one_texture(wp_text,
-        (sfVector2f){to_add + TO_ADD_ATH, TO_ADD_ATH}, win);
+            (sfVector2f){to_add + TO_ADD_ATH, TO_ADD_ATH}, win);
+    to_add = print_one_text(0.0, "Timer",
+        (sfVector2f){to_add * win->scale.x + TO_ADD_ATH, -TO_ADD_ATH}, win);
 }

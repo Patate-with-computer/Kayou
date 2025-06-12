@@ -5,7 +5,7 @@
 ** free_window.c
 */
 
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "map.h"
 #include "player.h"
 #include "lib.h"
@@ -26,6 +26,8 @@ static void free_other_csfml(game_assets_t *to_free)
         sfShader_destroy(to_free->csfml.wp_shader);
     if (to_free->csfml.back != NULL)
         sfSprite_destroy(to_free->csfml.back);
+    if (to_free->csfml.clock_timer != NULL)
+        sfClock_destroy(to_free->csfml.clock_timer);
 }
 
 static void free_csfml(game_assets_t *to_free)
@@ -56,8 +58,8 @@ game_assets_t *free_window(game_assets_t *to_free)
         sfSprite_destroy(to_free->csfml.sprite);
     if (to_free->csfml.rend_text != NULL)
         sfRenderTexture_destroy(to_free->csfml.rend_text);
-    if (to_free->csfml.light_shader != NULL)
-        sfShader_destroy(to_free->csfml.light_shader);
+    if (to_free->csfml.brume_shader != NULL)
+        sfShader_destroy(to_free->csfml.brume_shader);
     free_song(to_free->song_lib);
     destroy_menu_struct(to_free->menu);
     free_target(to_free->entities.target);

@@ -6,12 +6,13 @@
 */
 
 #include <stddef.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 
 static void null_csfml(game_assets_t *win)
 {
     win->csfml.win = NULL;
     win->csfml.clock = NULL;
+    win->csfml.clock_timer = NULL;
     win->csfml.shadow = NULL;
     win->csfml.quad = NULL;
     win->csfml.font = NULL;
@@ -23,7 +24,7 @@ static void null_csfml(game_assets_t *win)
     win->csfml.sprite = NULL;
     win->csfml.back = NULL;
     win->csfml.rend_text = NULL;
-    win->csfml.light_shader = NULL;
+    win->csfml.brume_shader = NULL;
 }
 
 void null_game_assets_struct(void *window)
@@ -31,6 +32,7 @@ void null_game_assets_struct(void *window)
     game_assets_t *win = (game_assets_t *)window;
 
     null_csfml(win);
+    win->timer = 0.0f;
     win->entities.player = NULL;
     win->entities.cursor = NULL;
     win->entities.wall = NULL;

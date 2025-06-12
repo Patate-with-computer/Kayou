@@ -15,10 +15,12 @@ typedef struct game_assets_s game_assets_t;
 enum {
     BUTTON_CROIX,
     BUTTON_CIRCLE,
-    BUTTON_SQUARE,
     BUTTON_TRIANGLE,
+    BUTTON_SQUARE,
     BUTTON_L1,
-    BUTTON_R1
+    BUTTON_R1,
+    BUTTON_L2,
+    BUTTON_OPTION = 9
 };
 
 sfBool get_key_attack(void);
@@ -30,5 +32,8 @@ sfBool get_one_click(void);
 sfBool get_one_button_click(sfKeyCode key);
 sfBool get_one_e(void);
 sfBool get_one_escape(void);
+float get_mov_joy(size_t joy_nb, sfJoystickAxis axis);
+void set_vertical_btn(game_assets_t *win);
+void set_horizontal_btn(game_assets_t *win);
 
 #endif

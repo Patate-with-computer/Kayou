@@ -5,7 +5,7 @@
 ** draw_render_sprite.c
 */
 
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "map.h"
 #include "player.h"
 

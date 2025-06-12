@@ -6,12 +6,22 @@
 */
 
 #include <stdbool.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 
 bool is_in_rect(sfVector2f pos, sfFloatRect rect)
 {
     bool a = (pos.x >= rect.left && pos.x <= rect.left + rect.width);
     bool b = (pos.y >= rect.top && pos.y <= rect.top + rect.height);
 
+    return a && b;
+}
+
+bool is_in_rect2(sfVector2f pos, sfFloatRect rect)
+{
+    bool a = (pos.x >= rect.left && pos.x <= rect.left + rect.width);
+    bool b = (pos.y >= rect.top && pos.y <= rect.top + rect.height);
+
+    if (sfJoystick_isConnected(0))
+        return false;
     return a && b;
 }

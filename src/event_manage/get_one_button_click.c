@@ -1,15 +1,8 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** G-ING-210-PAR-2-1-wolf3d-tanguy.folliot
 ** File description:
 ** get_one_button_click.c
-*/
-
-/*
-** EPITECH PROJECT, 2024
-** G-ING-210-PAR-2-1-wolf3d-tanguy.folliot
-** File description:
-** get_one_click.c
 */
 
 #include <SFML/Graphics.h>
@@ -18,7 +11,8 @@
 sfBool get_one_e(void)
 {
     static sfBool prev_state = sfFalse;
-    sfBool key_pressed = sfKeyboard_isKeyPressed(sfKeyE);
+    sfBool key_pressed = sfKeyboard_isKeyPressed(sfKeyE) ^
+        get_joy_button(0, BUTTON_CROIX);
 
     if (key_pressed && !prev_state) {
         prev_state = sfTrue;
@@ -32,7 +26,8 @@ sfBool get_one_e(void)
 sfBool get_one_escape(void)
 {
     static sfBool prev_state = sfFalse;
-    sfBool key_pressed = sfKeyboard_isKeyPressed(sfKeyEscape);
+    sfBool key_pressed = sfKeyboard_isKeyPressed(sfKeyEscape) ^
+        get_joy_button(0, BUTTON_OPTION);
 
     if (key_pressed && !prev_state) {
         prev_state = sfTrue;

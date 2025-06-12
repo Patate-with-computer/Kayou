@@ -14,6 +14,7 @@
 #include "texture_pack.h"
 #include "items.h"
 #include "save_manage.h"
+#include "screen_text.h"
 
 static const break_array_t breakbable[] = {
     {{240, 168}, {240, 200}, W_WOOD},
@@ -41,12 +42,20 @@ static const add_item_t item_array[] = {
     {{200, 220}, I_MONEY}
 };
 
+static const add_pnj_t pnj_array[] = {
+    {{20, 180}, I_PNJ, lab_turn_pnj},
+    {{430, 60}, I_PNJ2, good_ending},
+    {{380, 350}, I_PNJ, wrong_way},
+    {{220, 300}, I_PNJ3, hello}
+};
+
 void set_labyrinth(game_assets_t *win, sfVector2f reset)
 {
     wall_t *tmp = read_file(ROOM(labyrinth), &win->entities.player->pos);
 
     if (tmp == NULL)
         return;
+    win->is_brume = true;
     win->shadow_room = true;
     free_wall(win->entities.wall);
     win->entities.wall = tmp;
@@ -58,6 +67,7 @@ void set_labyrinth(game_assets_t *win, sfVector2f reset)
     add_breakable_array(win, breakbable,
         sizeof(breakbable) / sizeof(break_array_t));
     add_item_array(win, item_array, sizeof(item_array) / sizeof(add_item_t));
+    add_pnj_array(win, pnj_array, sizeof(pnj_array) / sizeof(add_pnj_t));
     win->entities.player->angle = 0;
     write_a_save(win, win->nb_save);
 }

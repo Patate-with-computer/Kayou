@@ -22,7 +22,9 @@ enum {
     RM_DIAGMAP,
     RM_LABYRINTH,
     RM_HELL_ROOM,
-    RM_BOSS
+    RM_BOSS,
+    RM_CORRUPTED_ROOM,
+    RM_DEMO
 };
 
 typedef struct ground_evt_s {
@@ -35,6 +37,7 @@ typedef struct ground_evt_s {
 extern const ground_evt_t grd[];
 
 bool is_in_rect(sfVector2f pos, sfFloatRect rect);
+bool is_in_rect2(sfVector2f pos, sfFloatRect rect);
 
 void set_room_by_ground_evt(game_assets_t *win);
 void set_intro(game_assets_t *win, sfVector2f reset);
@@ -46,5 +49,7 @@ void set_labyrinth(game_assets_t *win, sfVector2f reset);
 void set_diag_map(game_assets_t *win, sfVector2f reset);
 void set_hell_room(game_assets_t *win, sfVector2f reset);
 void set_boss(game_assets_t *win, sfVector2f reset);
+void set_corrupted_room(game_assets_t *win, sfVector2f reset);
+void set_demo(game_assets_t *win, sfVector2f reset);
 
 #endif

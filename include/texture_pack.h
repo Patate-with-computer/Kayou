@@ -11,11 +11,22 @@
     #define GET_FOLDER(a) (#a)
     #include <SFML/Graphics.h>
     #include <stdio.h>
-    #include "type.h"
+    #include "wolf/type.h"
+
+typedef struct game_assets_s game_assets_t;
+
+// texture pack name
+    #define MAX_TEXTURE_PACK 120
+static const char texture_pack_dir[] = "./assets/texture_pack/";
+void free_texture_name(char *texture_name[MAX_TEXTURE_PACK]);
+char **get_texture_pack_name(void);
+
 
 static const char default_pack[] = "default";
-static const char epitech_pack[] = "special_epitech";
 
+////////////////////////////////////////////////////////////
+/// \brief array for the names of the texture (in assets/texture_pack/...)
+////////////////////////////////////////////////////////////
 extern const char *enemy_texture_name[];
 extern const char *items_texture_name[];
 extern const char *target_texture_name[];
@@ -23,16 +34,23 @@ extern const char *wall_texture_name[];
 extern const char *weapon_texture_name[];
 extern const char *attack_texture_name[];
 
+////////////////////////////////////////////////////////////
+/// \brief enum the match with the name of the texture (to
+///        get the texture more easily)
+////////////////////////////////////////////////////////////
 enum {
-    E_ENEMY, E_TENTACULE, E_MOB, E_CHEAT};
+    E_ENEMY, E_TENTACULE, E_MOB, E_CHEAT,
+    E_WOOD};
 enum {
-    I_MONEY, I_LIFE, I_MANA};
+    I_MONEY, I_LIFE, I_MANA, I_BARIL, I_EXPLOSION,
+    I_PNJ, I_PNJ2, I_PNJ3, I_ENEMY, I_FLOWER,
+    I_BLOOD, I_BLOOD2, I_BRICK};
 enum {
     T_TARGET};
 enum {
     W_WALL_1, W_WALL_2, W_WOOD, W_BUTTONS,
     W_SAVE_IMAGE, W_TEXT_SPRITE, W_CREDITS,
-    W_BACKGROUND};
+    W_BACKGROUND, W_TEXT_PANEL};
 enum {
     WP_ROCK, WP_ROCK_VIEW,
     WP_LIGHT, WP_LIGHT_VIEW,
@@ -58,5 +76,8 @@ sfTexture **free_one_pack(sfTexture **pack);
 texture_pack_t *init_texture_pack(const char *pack_name);
 texture_pack_t *free_texture_pack(texture_pack_t *text_pack);
 sfTexture *pack(set_texture_t set_text, texture_pack_t *text_pack);
+sfVector2f get_texture_size(set_texture_t text, texture_pack_t *pk);
+void load_text(game_assets_t *win, char const *text);
+void set_all_wall_texture(game_assets_t *win);
 
 #endif

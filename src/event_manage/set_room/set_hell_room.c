@@ -13,6 +13,7 @@
 #include "texture_pack.h"
 #include "items.h"
 #include "save_manage.h"
+#include "screen_text.h"
 
 static const break_array_t breakable[] = {
     {{20, 40}, {20, 80}, W_WOOD},
@@ -95,8 +96,33 @@ static const add_item_t item_array[] = {
     {{320, 360}, I_MONEY},
     {{340, 360}, I_MANA},
     {{400, 420}, I_MONEY},
-    {{420, 420}, I_MANA}
+    {{420, 420}, I_MANA},
+    {{200, 600}, I_BARIL},
+    {{200, 630}, I_BARIL},
+    {{200, 660}, I_BARIL},
+    {{200, 690}, I_BARIL},
+    {{250, 600}, I_BARIL},
+    {{250, 630}, I_BARIL},
+    {{250, 660}, I_BARIL},
+    {{250, 690}, I_BARIL},
+    {{300, 600}, I_BARIL},
+    {{300, 630}, I_BARIL},
+    {{300, 660}, I_BARIL},
+    {{300, 690}, I_BARIL},
+    {{350, 600}, I_BARIL},
+    {{350, 630}, I_BARIL},
+    {{350, 660}, I_BARIL},
+    {{350, 690}, I_BARIL}
 };
+
+
+static const add_pnj_t pnj_array[] = {
+    {{100, 50}, I_PNJ3, dont_like},
+    {{160, 100}, I_PNJ2, visibilty},
+    {{600, 480}, I_ENEMY, golDsquid},
+    {{640, 760}, I_ENEMY, warning}
+};
+
 
 void set_hell_room(game_assets_t *win, sfVector2f reset)
 {
@@ -104,8 +130,10 @@ void set_hell_room(game_assets_t *win, sfVector2f reset)
 
     if (tmp == NULL)
         return;
-    win->shadow_room = true;
+    win->is_brume = true;
+    win->shadow_room = false;
     free_wall(win->entities.wall);
+    win->entities.player->angle = 0.0f;
     win->entities.wall = tmp;
     if (reset.x != RESET || reset.y != RESET)
         win->entities.player->pos = reset;
@@ -115,5 +143,6 @@ void set_hell_room(game_assets_t *win, sfVector2f reset)
     add_breakable_array(win, breakable,
         sizeof(breakable) / sizeof(break_array_t));
     add_item_array(win, item_array, sizeof(item_array) / sizeof(add_item_t));
+    add_pnj_array(win, pnj_array, sizeof(pnj_array) / sizeof(add_pnj_t));
     write_a_save(win, win->nb_save);
 }

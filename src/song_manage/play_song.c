@@ -6,7 +6,7 @@
 */
 
 #include <math.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "song_manage.h"
 #include "player.h"
 #include "cursor_bar.h"

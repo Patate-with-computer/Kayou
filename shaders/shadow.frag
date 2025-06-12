@@ -9,7 +9,7 @@ uniform float light_angle;
 void main()
 {
     vec2 uv = gl_TexCoord[0].st;
-    float new_dist = min(200.0 / (dist * 3), 1.0);
+    float new_dist = min(100.0 / (dist * 3), 1.0);
     vec4 text = texture2D(texture, uv);
     if (is_visible && is_shadow) {
         float angle_factor = 1.0 - clamp(light_angle, 0.0, 0.8);

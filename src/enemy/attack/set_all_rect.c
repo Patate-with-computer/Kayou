@@ -8,7 +8,7 @@
 #include <math.h>
 #include "enemy.h"
 #include "lib.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 
 void set_rect_attack(enemy_attack_t *attack, game_assets_t *win)
 {

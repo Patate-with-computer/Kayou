@@ -13,6 +13,7 @@
 #include "texture_pack.h"
 #include "items.h"
 #include "save_manage.h"
+#include "screen_text.h"
 
 static const break_array_t breakbable[] = {
     {{160, 160}, {128, 192}, W_WOOD},
@@ -34,6 +35,7 @@ static const add_item_t item_array[] = {
     {{232, 120}, I_MONEY},
     {{248, 104}, I_MONEY},
     {{248, 120}, I_MONEY},
+    {{228, 220}, I_BARIL},
     {{152, 264}, I_MONEY},
     {{152, 280}, I_MONEY},
     {{136, 264}, I_MONEY},
@@ -43,7 +45,21 @@ static const add_item_t item_array[] = {
     {{32, 336}, I_MONEY},
     {{16, 304}, I_LIFE},
     {{16, 320}, I_MANA},
-    {{16, 336}, I_MONEY}
+    {{16, 336}, I_MONEY},
+    {{150, 12}, I_FLOWER},
+    {{150, 32}, I_FLOWER},
+    {{130, 12}, I_FLOWER},
+    {{150, 100}, I_BLOOD2},
+    {{150, 80}, I_BRICK},
+    {{150, 60}, I_BLOOD2},
+    {{150, 120}, I_FLOWER},
+    {{150, 140}, I_BRICK}
+};
+
+static const add_pnj_t pnj_array[] = {
+    {{100, 50}, I_PNJ, intro_pnj},
+    {{70, 300}, I_ENEMY, intro_pnj_enemy},
+    {{250, 320}, I_PNJ2, intro_command}
 };
 
 void set_intro(game_assets_t *win, sfVector2f reset)
@@ -54,6 +70,7 @@ void set_intro(game_assets_t *win, sfVector2f reset)
         return;
     free_wall(win->entities.wall);
     win->entities.wall = tmp;
+    win->is_brume = false;
     win->shadow_room = false;
     if (reset.x != RESET || reset.y != RESET)
         win->entities.player->pos = reset;
@@ -62,6 +79,7 @@ void set_intro(game_assets_t *win, sfVector2f reset)
     add_breakable_array(win, breakbable,
         sizeof(breakbable) / sizeof(break_array_t));
     add_item_array(win, item_array, sizeof(item_array) / sizeof(add_item_t));
+    add_pnj_array(win, pnj_array, sizeof(pnj_array) / sizeof(add_pnj_t));
     win->room = RM_INTRO;
     write_a_save(win, win->nb_save);
 }

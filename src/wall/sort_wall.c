@@ -5,35 +5,64 @@
 ** sort_wall.c
 */
 
-#include <stddef.h>
+#include <stdlib.h>
 #include "map.h"
 
-static void sort_one_value(wall_t **tmp, wall_t *current, wall_t *sorted)
+int count_walls_limit(wall_t *head, float limit)
 {
-    (*tmp) = sorted;
-    while ((*tmp)->next != NULL &&
-            (*tmp)->next->distance < current->distance) {
-        (*tmp) = (*tmp)->next;
+    int count = 0;
+
+    for (; head != NULL; head = head->next)
+        if (head->distance < limit)
+            count++;
+    return count;
+}
+
+static int compare_walls(const void *a, const void *b)
+{
+    wall_t *wa = *(wall_t **)a;
+    wall_t *wb = *(wall_t **)b;
+
+    return (wa->distance > wb->distance) - (wa->distance < wb->distance);
+}
+
+static void set_array(wall_t **head, wall_t **array, wall_t **last_unsorted)
+{
+    wall_t *curr = *head;
+    wall_t *next = NULL;
+    int i = 0;
+
+    while (curr != NULL) {
+        next = curr->next;
+        if (curr->distance < MAX_DIST_RENDER) {
+            array[i] = curr;
+            ++i;
+        } else {
+            *last_unsorted = curr;
+            last_unsorted = &curr->next;
+        }
+        curr = next;
     }
-    current->next = (*tmp)->next;
-    (*tmp)->next = current;
+    *last_unsorted = NULL;
 }
 
 void sort_wall(wall_t **head)
 {
-    wall_t *sorted = NULL;
-    wall_t *current = *head;
-    wall_t *next = NULL;
-    wall_t *tmp = NULL;
+    int count = count_walls_limit(*head, MAX_DIST_RENDER);
+    wall_t **array = NULL;
+    wall_t *unsorted_part = NULL;
+    wall_t **last_unsorted = &unsorted_part;
 
-    while (current != NULL) {
-        next = current->next;
-        if (sorted == NULL || current->distance < sorted->distance) {
-            current->next = sorted;
-            sorted = current;
-        } else
-            sort_one_value(&tmp, current, sorted);
-        current = next;
-    }
-    *head = sorted;
+    if (count <= 1)
+        return;
+    array = malloc(sizeof(wall_t *) * count);
+    if (array == NULL)
+        return;
+    set_array(head, array, last_unsorted);
+    qsort(array, count, sizeof(wall_t *), compare_walls);
+    for (int i = 0; i < count - 1; i++)
+        array[i]->next = array[i + 1];
+    array[count - 1]->next = unsorted_part;
+    *head = array[0];
+    free(array);
 }

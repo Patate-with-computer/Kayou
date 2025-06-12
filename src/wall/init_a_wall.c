@@ -9,7 +9,7 @@
 #include "file_manage.h"
 #include "map.h"
 #include "player.h"
-#include "type.h"
+#include "wolf/type.h"
 #include "texture_pack.h"
 
 wall_t *init_a_wall(sfVector2f new_pos[3])

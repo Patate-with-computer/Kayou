@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <SFML/Graphics.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "buttons.h"
 #include "lib.h"
 #include "texture_pack.h"

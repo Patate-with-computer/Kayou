@@ -28,7 +28,9 @@ static const add_item_t item_array[] = {
     {{280, 8}, I_MANA},
     {{264, 24}, I_MONEY},
     {{280, 24}, I_MONEY},
-    {{280, 40}, I_LIFE}
+    {{280, 40}, I_LIFE},
+    {{220, 200}, I_BARIL},
+    {{220, 100}, I_BARIL}
 };
 
 void set_diag_map(game_assets_t *win, sfVector2f reset)
@@ -40,6 +42,7 @@ void set_diag_map(game_assets_t *win, sfVector2f reset)
     free_wall(win->entities.wall);
     win->entities.wall = tmp;
     win->shadow_room = false;
+    win->is_brume = false;
     if (reset.x != RESET || reset.y != RESET)
         win->entities.player->pos = reset;
     read_file_enemy(ENEMY(diag_map), win);

@@ -8,7 +8,7 @@
 #include <SFML/Graphics.h>
 #include <stdlib.h>
 #include <string.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "buttons.h"
 #include "cursor_bar.h"
 #include "event_manage.h"
@@ -18,15 +18,29 @@
 #include "target.h"
 #include "save_manage.h"
 
-static void load_text(game_assets_t *win, char const *text)
+
+static void set_opt_btn(game_assets_t *win)
 {
-    free_texture_pack(win->text_pack);
-    win->text_pack = init_texture_pack(text);
-    free_target(win->entities.target);
-    win->entities.target = init_target(TARGET_TYPE, T_TARGET, win->text_pack);
-    destroy_menu_struct(win->menu);
-    win->menu = init_window_data(win->text_pack);
-    lunch_a_save(win, win->nb_save);
+    if (!sfJoystick_isConnected(0))
+        return;
+    while (win->vertical_btn < 0)
+        win->vertical_btn = 4 + win->vertical_btn;
+    while (win->horizontal_btn < 0)
+        win->horizontal_btn = 2 + (win->vertical_btn == 3) +
+            win->horizontal_btn;
+    win->horizontal_btn %= 2 + (win->vertical_btn == 1);
+    win->vertical_btn %= 4;
+    win->menu->buttons[BACK_BTN]->hovered = win->vertical_btn == 0;
+    win->menu->buttons[MUSIC_BUTTON]->hovered = win->vertical_btn == 1;
+    win->menu->buttons[SOUNDS_BTN]->hovered = win->vertical_btn == 2;
+    win->menu->buttons[EPITECH_BTN]->hovered = win->vertical_btn == 3 &&
+        win->horizontal_btn == 0;
+    win->menu->buttons[DEFAULT_BTN]->hovered = win->vertical_btn == 3 &&
+        win->horizontal_btn == 1;
+    if (win->vertical_btn == 1)
+        move_circle_joystick(win, MUSIC_CURSOR);
+    if (win->vertical_btn == 2)
+        move_circle_joystick(win, SOUNDS_CURSOR);
 }
 
 static void check_opt_button(game_assets_t *win)
@@ -46,7 +60,7 @@ static void check_opt_button(game_assets_t *win)
     if (check_button_hover(win, def) && get_one_click())
         return load_text(win, default_pack);
     if (check_button_hover(win, epitech) && get_one_click())
-        return load_text(win, epitech_pack);
+        return load_text(win, "special_epitech");
     set_volume(win);
 }
 
@@ -61,5 +75,6 @@ void opt_menu(game_assets_t *win)
     print_button(win, EPITECH_BTN);
     display_cursor(win, SOUNDS_CURSOR);
     display_cursor(win, MUSIC_CURSOR);
+    set_opt_btn(win);
     check_opt_button(win);
 }

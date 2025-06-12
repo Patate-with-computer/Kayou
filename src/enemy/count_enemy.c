@@ -7,7 +7,7 @@
 
 #include "enemy.h"
 #include "map.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 
 size_t count_enemy(game_assets_t *win)
 {

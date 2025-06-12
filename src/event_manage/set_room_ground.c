@@ -7,7 +7,7 @@
 
 #include "player.h"
 #include "ground_evt.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 
 void set_room_by_ground_evt(game_assets_t *win)
 {

@@ -5,17 +5,33 @@
 ** display_item.c
 */
 
+#include <math.h>
 #include "enemy.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "map.h"
 #include "player.h"
 #include "items.h"
 #include "texture_pack.h"
 
+static float get_z_add(wall_t *item, sfVector3f pr)
+{
+    float z_add = pr.z * SIZE_ITEM / SIZE_WALL;
+
+    if (item->item->texture.text_nb == I_BARIL)
+        z_add = pr.z * SIZE_BARIL / SIZE_WALL;
+    if (item->item->texture.text_nb == I_EXPLOSION)
+        z_add = pr.z * DIST_EXPLOD / SIZE_WALL;
+    if (item->item->pnj_txt != NULL)
+        z_add = pr.z * SIZE_ENEMY / SIZE_WALL;
+    if (item->item->texture.text_nb >= I_FLOWER)
+        z_add = pr.z * SIZE_BARIL / SIZE_WALL;
+    return z_add;
+}
+
 static void set_vertext(sfVertex vertex[4], game_assets_t *win,
     sfVector3f pr, wall_t *item)
 {
-    float z_add = pr.z * SIZE_ITEM / SIZE_WALL;
+    float z_add = get_z_add(item, pr);
     sfVector3f pr2 = {pr.x + z_add / 2.0, pr.y, pr.z};
     float left = item->item->rect.left;
     float top = item->item->rect.top;

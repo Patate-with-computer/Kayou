@@ -9,7 +9,7 @@
     #define ENEMY_H
     #include <SFML/Graphics.h>
     #include <stdbool.h>
-    #include "type.h"
+    #include "wolf/type.h"
     #define SIZE_ENEMY 15.0
     #define SIZE_ENEMY_ATK 15.0
     #define SIZE_FONT 3.0
@@ -18,7 +18,7 @@
     #define ENEMY(a) ("assets/enemy/"#a WOLF_TERM)
     #define FONT_STR "assets/font/font.ttf"
 #ifndef MAX_FPS
-    #include "window_manage.h"
+    #include "window/window_manage.h"
 #endif
     #define ANIMATION_FPS 1.0
     #define ATTACK_ENEMY_FPS 20.0

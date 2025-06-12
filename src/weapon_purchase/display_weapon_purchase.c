@@ -7,7 +7,7 @@
 
 #include "player.h"
 #include "texture_pack.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "map.h"
 #include "ground_evt.h"
 #include "event_manage.h"
@@ -35,7 +35,9 @@ static sfVector2f set_shader(game_assets_t *win, sfFloatRect rect,
 
     if (sh == NULL)
         return m_pos_f;
-    sfShader_setBoolUniform(sh, "is_in_rect", is_in_rect(m_pos_f, rect));
+    sfShader_setBoolUniform(sh, "is_in_rect",
+        is_in_rect2(m_pos_f, rect) || (sfJoystick_isConnected(0) &&
+        (int)nb_weapon == win->horizontal_btn));
     sfShader_setBoolUniform(sh, "enough", pl->money >= weapon->price);
     sfShader_setBoolUniform(sh, "already", pl->get_weapon[nb_weapon]);
     sfShader_setBoolUniform(sh, "is_actual", nb_weapon == pl->weapon_name);
@@ -52,7 +54,9 @@ static void draw(game_assets_t *win, weapon_t *wp,
     sfVector2f m_pos = set_shader(win, rect, wp, nb_weapon);
     player_t *player = win->entities.player;
 
-    if (is_in_rect(m_pos, rect) && get_one_click()) {
+    if ((is_in_rect2(m_pos, rect) ||
+        (sfJoystick_isConnected(0) &&
+        win->horizontal_btn == (int)nb_weapon)) && get_one_click()) {
         if (player->money >= wp->price && !player->get_weapon[nb_weapon]) {
             player->get_weapon[nb_weapon] = true;
             player->money -= wp->price;

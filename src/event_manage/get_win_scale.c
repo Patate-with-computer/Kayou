@@ -5,7 +5,7 @@
 ** get_win_scale.c
 */
 
-#include "window_manage.h"
+#include "window/window_manage.h"
 
 void get_win_scale(game_assets_t *win)
 {

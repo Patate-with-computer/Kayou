@@ -5,7 +5,7 @@
 ** set_e_menu.c
 */
 
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "echap_menu.h"
 #include "player.h"
 #include "texture_pack.h"
@@ -31,15 +31,25 @@ static void print_background(game_assets_t *win)
 
 #include <math.h>
 #include "buttons.h"
+static void set_price_btn(game_assets_t *win)
+{
+    if (!sfJoystick_isConnected(0))
+        return;
+    while (win->horizontal_btn < 0)
+        win->horizontal_btn = NB_WEAPON + win->horizontal_btn;
+    win->horizontal_btn %= NB_WEAPON;
+}
+
 void set_e_menu(game_assets_t *win)
 {
     sfVector2f pos = {START_X_WP, START_Y_WP};
 
-    if (!win->is_paused)
+    if (!win->is_paused || win->is_text)
         return;
     print_background(win);
     if (win->is_echap_menu)
         return exit_menu(win);
+    set_price_btn(win);
     for (size_t i = 0; i < NB_WEAPON; ++i) {
         if (pos.x >= win->size.x - SIZE_RECT_WP - START_X_WP) {
             pos.x = START_X_WP;

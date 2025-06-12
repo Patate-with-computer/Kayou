@@ -5,7 +5,7 @@
 ** display_weapon.c
 */
 
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "map.h"
 #include "buttons.h"
 #include "texture_pack.h"
@@ -26,6 +26,13 @@ static void set_vertext(sfVertex vertex[4], float pos_x)
         .color = sfWhite, .texCoords = {SIZE_TEXT_SAVE, 0}};
 }
 
+static bool check_hovered(game_assets_t *win, size_t n)
+{
+    if (win->vertical_btn != 1 || !sfJoystick_isConnected(0))
+        return false;
+    return win->horizontal_btn == (int)n;
+}
+
 static void draw(game_assets_t *win, size_t n, float pos_x, int *is_click)
 {
     sfRenderStates st = {sfBlendAlpha, sfTransform_Identity, NULL, NULL};
@@ -33,7 +40,8 @@ static void draw(game_assets_t *win, size_t n, float pos_x, int *is_click)
     sfVector2i m_pos = sfMouse_getPositionRenderWindow(win->csfml.win);
     sfVector2f m_pos_f = {(float)m_pos.x, (float)m_pos.y};
 
-    if (is_in_rect(m_pos_f, rect) || *is_click == (int)n) {
+    if (is_in_rect2(m_pos_f, rect) || *is_click == (int)n ||
+            check_hovered(win, n)) {
         st.shader = win->csfml.hover;
         if (get_confirm_key()) {
             *is_click = n;
@@ -81,7 +89,7 @@ void check_save_button(game_assets_t *win, int is_click)
 
 void display_save(game_assets_t *win)
 {
-    static int is_click = -1;
+    static int is_click = 0;
     float pos_x = 0;
 
     for (size_t i = 0; i < NBR_MAX_SAVE; ++i) {

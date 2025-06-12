@@ -1,6 +1,6 @@
-# Introduction to Software Engineering - Wolf3D
+# Kayou
 
-This is an **Epitech project** called Wolf3D.
+This is from an **Epitech project** called Wolf3D.
 
 Its a five week project from the the second semester of the Epitech **Introduction to Software Engineering module** (**G-ING-210**).
 
@@ -48,6 +48,12 @@ make help
 ```bash
 ./wolf3d
 # --> to start playing our game.
+
+./wolf3d godmode
+# --> to play the game on god-mode (can't take any damage).
+
+./wolf3d demo
+# --> to launch the demo of the game (tutorial).
 ```
 
 ## KEYBOARD CONTROLS
@@ -59,7 +65,9 @@ make help
 | "SPACE" or "left click" | shoot with the equiped weapon |
 | "E" | to open the shop |
 | "R" | change weapon |
+| "right click" | lock an ennemy |
 | "ESCAPE" | go to the echap menu |
+| "A" | Interract with a pnj / Display a text / Exit a text |
 
 ## CONTROLLER CONTROLS
 
@@ -67,7 +75,13 @@ make help
 | :---------------: | :---------------: |
 | joysticks | move the player in the game and move the camera |
 | "R1" | shoot with the equiped weapon |
+| key "×" | to open the shop |
 | "L1" | change weapon |
+| "L2" | lock an ennemy |
+| key "○" | Interract with a pnj / Display a text / Exit a text |
+| "OPTIONS" | go to the echap menu |
+| joystick left | navigate trought menus |
+| joystick right | change volume in the option menu |
 
 ## MENU
 
@@ -112,6 +126,10 @@ make help
 **When playing, the game autosave when the player goes to another room.**
 
 **This game contain many secrets, like secrets rooms, secret boss, so don't hesitate to throw stones on walls.**
+
+**You can find our game lore right here:**
+
+- [Wolf3D's Lore](./Wolf3D_lore/)
 
 ## Authors
 

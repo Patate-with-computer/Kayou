@@ -12,11 +12,19 @@
     #include <SFML/Graphics/Rect.h>
     #include <SFML/Graphics/Texture.h>
     #include <stdbool.h>
-    #include "type.h"
+    #include "wolf/type.h"
     #define SIZE_WALL 30.0
     #define MIN_Y 0.01
     #define BK_STEP 8.0
     #define MAX_SHADOW 150.0
+    #define MAX_DIST_RENDER 400.0f
+    #define SIZE_HOR SIZE_WALL + 8.0
+
+// define for the brume
+    #define MAX_BRUME 100
+    #define DIST_BRUME 1.0f
+    #define CHECK_DIST_BRUME 8.0f
+    #define MAX_REND_BRUME 300.0f
 
 // other struct
 typedef struct game_assets_s game_assets_t;
@@ -52,7 +60,6 @@ typedef struct wall_s {
     wall_object_t object;
     float distance;
     is_printable_t printbale;
-    sfVector2f size_rect;
     struct wall_s *next;
     bool is_breakable;
     bool hidden;
@@ -82,6 +89,9 @@ void create_breakable_wall(game_assets_t *win, sfVector2f start,
     sfVector2f end, size_t nb_text);
 void add_breakable_array(game_assets_t *win,
     break_array_t const *array, size_t nb_array);
+void display_horizon_bar(game_assets_t *win);
 void display_minimap(game_assets_t *assets);
+void display_one_bar(game_assets_t *win, float dist);
+int count_walls(wall_t *head);
 
 #endif

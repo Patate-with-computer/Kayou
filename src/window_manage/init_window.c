@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "player.h"
 #include "map.h"
 #include "file_manage.h"
@@ -20,16 +20,25 @@
 #include "echap_menu.h"
 #include "cursor_bar.h"
 #include "ground_evt.h"
+#include "screen_text.h"
 
 static bool init_text(game_assets_t *win)
 {
+    win->vertical_btn = 0;
+    win->horizontal_btn = 0;
     win->shadow_room = false;
+    win->is_brume = false;
+    win->is_text = false;
+    win->put.txt = NULL;
+    win->put.mode = BIG_MODE;
+    win->put.current = QUIT;
+    win->put.advance = false;
     win->csfml.cursor_circle = sfCircleShape_create();
     win->csfml.font = sfFont_createFromFile(FONT_STR);
     win->csfml.text = sfText_create();
     win->restart_clock = true;
     if (win->csfml.font == NULL || win->csfml.text == NULL ||
-            win->csfml.circle == NULL)
+            win->csfml.circle == NULL || win->csfml.clock_timer == NULL)
         return false;
     sfText_setFont(win->csfml.text, win->csfml.font);
     sfText_setColor(win->csfml.text, font_color);
@@ -42,12 +51,14 @@ static game_assets_t *init_entities(game_assets_t *win)
     win->entities.target = init_target(TARGET_TYPE, T_TARGET, win->text_pack);
     win->entities.wall = NULL;
     win->is_paused = false;
+    win->actual_demo = FIRST_ENEMY;
+    win->actual_boss = ATTACK;
     win->entities.echap_menu = init_echap_menu();
     win->csfml.sprite = sfSprite_create();
     win->csfml.back = sfSprite_create();
     win->csfml.rend_text = sfRenderTexture_create(WIN_WIDTH, WIN_HEIGTH,
         false);
-    win->csfml.light_shader = sfShader_createFromFile(NULL, NULL, brum_frag);
+    win->csfml.brume_shader = sfShader_createFromFile(NULL, NULL, brum_frag);
     win->entities.cursor = init_cursors();
     if (win->entities.player == NULL || win->entities.target == NULL ||
         win->entities.echap_menu == NULL || win->csfml.sprite == NULL ||
@@ -57,22 +68,28 @@ static game_assets_t *init_entities(game_assets_t *win)
     return win;
 }
 
-static game_assets_t *init_csfml(game_assets_t *win)
+static void init_csfml2(game_assets_t *win)
 {
-    sfVideoMode mode = {WIN_WIDTH, WIN_HEIGTH, BPP};
-    sfWindowStyle win_mode = sfClose | sfResize;
-
-    win->csfml.win = sfRenderWindow_create(mode, "Wolf3d", win_mode, NULL);
-    if (win->csfml.win == NULL)
-        return free_window(win);
-    sfRenderWindow_setFramerateLimit(win->csfml.win, MAX_FPS);
-    sfRenderWindow_setActive(win->csfml.win, sfTrue);
     win->csfml.clock = sfClock_create();
     win->csfml.shadow = sfShader_createFromFile(NULL, NULL, shadow_frag);
     win->csfml.hover = sfShader_createFromFile(NULL, NULL, hover_frag);
     win->csfml.wp_shader = sfShader_createFromFile(NULL, NULL, wp_frag);
     win->csfml.quad = sfVertexArray_create();
     win->csfml.circle = sfCircleShape_create();
+    win->csfml.clock_timer = sfClock_create();
+}
+
+static game_assets_t *init_csfml(game_assets_t *win)
+{
+    sfVideoMode mode = {WIN_WIDTH, WIN_HEIGTH, BPP};
+    sfWindowStyle win_mode = sfClose | sfResize;
+
+    win->csfml.win = sfRenderWindow_create(mode, "Kayou", win_mode, NULL);
+    if (win->csfml.win == NULL)
+        return free_window(win);
+    sfRenderWindow_setFramerateLimit(win->csfml.win, MAX_FPS);
+    sfRenderWindow_setActive(win->csfml.win, sfTrue);
+    init_csfml2(win);
     if (win->csfml.quad == NULL || win->csfml.shadow == NULL ||
             win->csfml.clock == NULL || win->csfml.hover == NULL ||
             init_text(win) == false || win->csfml.circle == NULL)

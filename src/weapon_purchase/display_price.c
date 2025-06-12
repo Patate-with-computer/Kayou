@@ -9,7 +9,7 @@
 #include <string.h>
 #include "player.h"
 #include "ground_evt.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "map.h"
 
 static void print_text(game_assets_t *win, float price, sfVector2f pos)
@@ -40,7 +40,8 @@ void display_price(game_assets_t *win, sfVector2f pos, size_t nb_weapon)
     weapon_t *weapon = win->entities.player->weapon[nb_weapon]->weapon;
     player_t *pl = win->entities.player;
 
-    if (!is_in_rect(m_pos_f, rect) || pl->get_weapon[nb_weapon])
+    if ((!is_in_rect2(m_pos_f, rect) && (int)nb_weapon != win->horizontal_btn)
+        || pl->get_weapon[nb_weapon])
         return;
     print_text(win, weapon->price, pos);
 }

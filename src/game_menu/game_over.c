@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "buttons.h"
 #include "cursor_bar.h"
 #include "event_manage.h"
@@ -16,6 +16,17 @@
 #include "song_manage.h"
 #include "lib.h"
 #include "save_manage.h"
+
+static void set_game_over_btn(game_assets_t *win)
+{
+    if (!sfJoystick_isConnected(0))
+        return;
+    while (win->horizontal_btn < 0)
+        win->horizontal_btn = 2 + win->horizontal_btn;
+    win->horizontal_btn %= 2;
+    win->menu->buttons[RESTART_BTN]->hovered = win->horizontal_btn == 0;
+    win->menu->buttons[MENU_RESTART_BNT]->hovered = win->horizontal_btn == 1;
+}
 
 void game_over(game_assets_t *win)
 {
@@ -28,6 +39,7 @@ void game_over(game_assets_t *win)
     display_background(win);
     print_button(win, RESTART_BTN);
     print_button(win, MENU_RESTART_BNT);
+    set_game_over_btn(win);
     sfRenderWindow_setMouseCursorVisible(win->csfml.win, sfTrue);
     if (check_button_hover(win, menu) && get_one_click())
         win->win_type = MAIN_MENU;

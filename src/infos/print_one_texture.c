@@ -8,7 +8,7 @@
 #include <string.h>
 #include "player.h"
 #include "texture_pack.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 
 static void set_vertext(sfVertex vertex[4], sfFloatRect rect, float size)
 {

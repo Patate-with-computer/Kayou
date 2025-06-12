@@ -7,7 +7,7 @@
 
 #ifndef INFOS_H
     #define INFOS_H
-    #include "window_manage.h"
+    #include "window/window_manage.h"
 
 float print_one_text(float info, const char *s, sfVector2f pos,
     game_assets_t *win);

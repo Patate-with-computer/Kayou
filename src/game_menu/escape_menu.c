@@ -8,9 +8,22 @@
 #include <SFML/Graphics.h>
 #include <stdlib.h>
 #include <string.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "buttons.h"
 #include "event_manage.h"
+
+static void set_escape_menu_btn(game_assets_t *win)
+{
+    if (!sfJoystick_isConnected(0))
+        return;
+    while (win->vertical_btn < 0)
+        win->vertical_btn = 4 + win->vertical_btn;
+    win->vertical_btn %= 4;
+    win->menu->buttons[CONTINUE_BTN]->hovered = win->vertical_btn == 0;
+    win->menu->buttons[OPTION_BNT]->hovered = win->vertical_btn == 1;
+    win->menu->buttons[MENU_BTN]->hovered = win->vertical_btn == 2;
+    win->menu->buttons[QUIT_BTN]->hovered = win->vertical_btn == 3;
+}
 
 void exit_menu(game_assets_t *win)
 {
@@ -19,6 +32,7 @@ void exit_menu(game_assets_t *win)
     print_button(win, OPTION_BNT);
     print_button(win, MENU_BTN);
     print_button(win, QUIT_BTN);
+    set_escape_menu_btn(win);
 }
 
 void check_exit_menu_hover(game_assets_t *window)

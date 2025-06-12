@@ -6,7 +6,7 @@
 */
 
 #include "buttons.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 
 void print_button(game_assets_t *win, size_t nb_btn)
 {

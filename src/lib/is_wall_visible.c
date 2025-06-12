@@ -22,6 +22,17 @@ sfVector2f get_center(wall_t *wall)
     return center;
 }
 
+static float angle_diff(float a, float b)
+{
+    float diff = a - b;
+
+    while (diff < -1.0f * M_PI)
+        diff += 2 * M_PI;
+    while (diff > M_PI)
+        diff -= 2 * M_PI;
+    return diff;
+}
+
 float get_wall_visibility_angle(wall_t *wall, player_t *pl, wall_t *walls)
 {
     sfVector2f center = get_center(wall);
@@ -29,7 +40,7 @@ float get_wall_visibility_angle(wall_t *wall, player_t *pl, wall_t *walls)
     float dist = hypotf(to_center.x, to_center.y);
     float angle = atan2f(to_center.y, to_center.x);
     float max_angle = MAX_ANGLE_LIGHT * M_PI / 180.0f;
-    float diff = fmodf(angle - pl->angle + M_PI, 2 * M_PI) - M_PI;
+    float diff = angle_diff(angle, pl->angle);
 
     if (raycast_to_walls(walls, pl->pos, angle, dist) < dist - 1.0f)
         return -1.0f;

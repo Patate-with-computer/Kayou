@@ -19,7 +19,8 @@ static const char *song_links[NB_SONG] = {
     "money.mp3",
     "button.mp3",
     "dead.mp3",
-    "touch.mp3"
+    "touch.mp3",
+    "explode.mp3"
 };
 
 static char *get_file_name(char const *file)

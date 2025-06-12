@@ -6,7 +6,7 @@
 */
 
 #include <math.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "player.h"
 #include "lib.h"
 
@@ -37,6 +37,17 @@ static void draw(game_assets_t *win, sfVertex vertex[4])
         win->csfml.quad, NULL);
 }
 
+static sfColor rm_color(bool is_brume, sfColor src)
+{
+    float to_add = is_brume * 50.0f / 100.0f;
+    sfColor new = src;
+
+    new.r -= new.r * to_add;
+    new.g -= new.g * to_add;
+    new.b -= new.b * to_add;
+    return new;
+}
+
 void draw_background(game_assets_t *win)
 {
     sfVertex vertex[4] = {0};
@@ -48,8 +59,8 @@ void draw_background(game_assets_t *win)
 
     if (win->shadow_room)
         return;
-    set_vertext(vertex, pos1, floor_color);
+    set_vertext(vertex, pos2, rm_color(win->is_brume, roof_color));
     draw(win, vertex);
-    set_vertext(vertex, pos2, roof_color);
+    set_vertext(vertex, pos1, rm_color(win->is_brume, floor_color));
     draw(win, vertex);
 }

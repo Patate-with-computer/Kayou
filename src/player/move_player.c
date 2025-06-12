@@ -7,7 +7,7 @@
 
 #include <math.h>
 #include <stdbool.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "event_manage.h"
 #include "player.h"
 #include "map.h"
@@ -88,7 +88,7 @@ void move_player(game_assets_t *win)
         win->restart_clock = false;
     }
     change_camera_angle(win);
-    if (!win->is_paused) {
+    if (!win->is_paused && !sfJoystick_isConnected(0)) {
         if (sfKeyboard_isKeyPressed(sfKeyZ))
             move_to_a_pos(win, Y_AXCIS, false, speed);
         if (sfKeyboard_isKeyPressed(sfKeyS))

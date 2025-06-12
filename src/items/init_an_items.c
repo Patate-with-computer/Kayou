@@ -20,10 +20,11 @@ items_t *init_an_items(size_t rand_nbr, float to_add,
     if (items == NULL)
         return NULL;
     items->texture = (set_texture_t){ITEMS_TYPE, rand_nbr};
+    items->pnj_txt = NULL;
     size = sfTexture_getSize(pack(items->texture, text_pack));
     items->size = (sfVector2f){size.x, size.y};
     memset(items->add_items, 0, sizeof(float) * NB_ADD);
-    items->add_items[rand_nbr] = to_add;
+    items->add_items[rand_nbr % 3] = to_add;
     items->anc_time = 0.0;
     items->rect = (sfFloatRect){0, 0, items->size.y, items->size.y};
     return items;

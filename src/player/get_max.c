@@ -6,7 +6,7 @@
 */
 
 #include <math.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "player.h"
 #include "map.h"
 #include "lib.h"

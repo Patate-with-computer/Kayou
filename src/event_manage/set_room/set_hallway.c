@@ -25,6 +25,7 @@ void set_hallway(game_assets_t *win, sfVector2f reset)
     if (tmp == NULL)
         return;
     win->shadow_room = true;
+    win->is_brume = false;
     free_wall(win->entities.wall);
     win->entities.wall = tmp;
     if (reset.x != RESET || reset.y != RESET)
@@ -41,6 +42,7 @@ void set_hallway1(game_assets_t *win, sfVector2f reset)
     if (tmp == NULL)
         return;
     win->shadow_room = true;
+    win->is_brume = false;
     free_wall(win->entities.wall);
     win->entities.wall = tmp;
     if (reset.x != RESET || reset.y != RESET)
@@ -60,6 +62,7 @@ void set_hallway2(game_assets_t *win, sfVector2f reset)
     if (tmp == NULL)
         return;
     win->shadow_room = true;
+    win->is_brume = false;
     free_wall(win->entities.wall);
     win->entities.wall = tmp;
     if (reset.x != RESET || reset.y != RESET)

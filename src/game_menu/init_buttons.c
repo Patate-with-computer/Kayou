@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <SFML/Graphics.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "buttons.h"
 #include "lib.h"
 #include <stdarg.h>

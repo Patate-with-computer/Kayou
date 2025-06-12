@@ -5,6 +5,16 @@
 ## makefile
 ##
 
+SCREEN_TEXT	=	display_screen_text.c	\
+				free_screen_text.c		\
+				get_size_txt.c			\
+				draw_txt.c				\
+				get_buffer.c			\
+				draw_all_lines.c		\
+				put_the_txt.c			\
+				dialog.c				\
+				get_a_key.c
+
 ATTACK		=	add_an_attack.c		\
 				display_attack.c	\
 				set_all_rect.c		\
@@ -19,17 +29,17 @@ ECHAP_MENU	=	set_e_menu.c	\
 				init_echap_menu.c
 
 ENEMY		=	init_an_enemy.c			\
-			display_enemy.c			\
-			convert_enemy.c			\
-			read_enemy_file.c		\
-			set_all_rect.c			\
-			set_all_texture.c		\
-			remove_life.c			\
-			init_texture_and_var.c	\
-			count_enemy.c			\
-			print_life.c			\
-			move_an_enemy.c			\
-			$(addprefix attack/, $(ATTACK))
+				display_enemy.c			\
+				convert_enemy.c			\
+				read_enemy_file.c		\
+				set_all_rect.c			\
+				set_all_texture.c		\
+				remove_life.c			\
+				init_texture_and_var.c	\
+				count_enemy.c			\
+				print_life.c			\
+				move_an_enemy.c			\
+				$(addprefix attack/, $(ATTACK))
 
 WINDOW_MANAGE	=	init_window.c		\
 					free_window.c		\
@@ -37,48 +47,56 @@ WINDOW_MANAGE	=	init_window.c		\
 					project_pt.c		\
 					draw_background.c	\
 					init_target.c		\
-					draw_render_sprite.c
+					draw_render_sprite.c	\
+					display_horizon_bar.c	\
+					move_cheat.c			\
+					maze_mode.c				\
+					demo.c
 
 PLAYER		=	free_player.c		\
-			init_player.c		\
-			move_player.c		\
-			set_rect_weapon.c	\
-			display_weapon.c	\
-			init_weapon.c		\
-			add_all_weapon.c	\
-			move_weapon.c		\
-			point_in_triangle.c	\
-			set_player_null.c	\
-			move_camera.c		\
-			check_weapon.c		\
-			get_max.c
+				init_player.c		\
+				move_player.c		\
+				set_rect_weapon.c	\
+				display_weapon.c	\
+				init_weapon.c		\
+				add_all_weapon.c	\
+				move_weapon.c		\
+				point_in_triangle.c	\
+				set_player_null.c	\
+				move_camera.c		\
+				check_weapon.c		\
+				lock.c				\
+				get_max.c
 
 
 ROOM		=	set_hallway.c		\
-            set_labyrinth.c		\
-			set_secret_room.c	\
-			set_diag_map.c		\
-			set_hell_room.c		\
-			set_boss.c			\
-			set_intro.c
+            	set_labyrinth.c		\
+				set_secret_room.c	\
+				set_diag_map.c		\
+				set_hell_room.c		\
+				set_boss.c			\
+				set_intro.c			\
+				set_corrupted_room.c	\
+				set_demo.c
 
 EVENT_MANAGE	=	event_manage.c		\
-			get_win_scale.c			\
-			ground_evt_struct.c		\
-			is_in_rect.c			\
-			set_room_ground.c		\
-			get_joy_button.c		\
-			get_one_click.c			\
-			get_one_button_click.c	\
-			$(addprefix set_room/, $(ROOM))
+					get_win_scale.c			\
+					ground_evt_struct.c		\
+					is_in_rect.c			\
+					set_room_ground.c		\
+					get_joy_button.c		\
+					get_one_click.c			\
+					get_one_button_click.c	\
+					set_joystick_btn.c		\
+					$(addprefix set_room/, $(ROOM))
 
-FILE_MANAGE	=	get_file_write_name.c		\
-			scan_all_line.c			\
-			get_texture_name.c		\
-			convert_file.c			\
-			read_file.c			\
-			create_rectangle.c		\
-			print_step.c
+FILE_MANAGE	=	get_file_write_name.c	\
+				scan_all_line.c			\
+				get_texture_name.c		\
+				convert_file.c			\
+				read_file.c				\
+				create_rectangle.c		\
+				print_step.c
 
 WALL			=	free_wall.c				\
 					distance_to_wall.c		\
@@ -106,7 +124,9 @@ LIB				=	set_all_null.c				\
 					set_all_null_menu.c				\
 					null_echap_menu.c				\
 					get_max.c						\
-					is_wall_visible.c
+					is_wall_visible.c				\
+					get_texture_size.c				\
+					get_cutstr.c
 
 WEAPON_PURCHASE =	display_weapon_purchase.c	\
 					display_price.c
@@ -143,7 +163,11 @@ TEXTURE_PACK	=	texture_name.c		\
 					init_one_pack.c		\
 					free_one_pack.c		\
 					free_texture_pack.c	\
-					pack.c
+					pack.c				\
+					free_texture_name.c	\
+					get_texture_pack_name.c	\
+					load_text.c				\
+					set_all_wall_texture.c
 
 SAVE_MANAGE	=	write_a_save.c		\
 				get_filename.c		\
@@ -163,6 +187,7 @@ MAIN			=	main.c
 SRC_DIR		=	src
 
 SRC		= 	$(addprefix $(SRC_DIR)/window_manage/, $(WINDOW_MANAGE))		\
+			$(addprefix $(SRC_DIR)/screen_text/, $(SCREEN_TEXT))			\
 			$(addprefix $(SRC_DIR)/cursor_bar/, $(CURSOR_BAR))				\
 			$(addprefix $(SRC_DIR)/weapon_purchase/, $(WEAPON_PURCHASE))	\
 			$(addprefix $(SRC_DIR)/echap_menu/, $(ECHAP_MENU))				\

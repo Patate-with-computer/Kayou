@@ -8,7 +8,7 @@
 #include <math.h>
 #include "player.h"
 #include "enemy.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "lib.h"
 #include "map.h"
 
@@ -27,7 +27,7 @@ static bool check_remove_wall(wall_t *attack, game_assets_t *win,
     sfVector2f add)
 {
     if (get_distance(win->entities.player->pos, attack->pos1) <=
-            MIN_DIST_CHECK_ATTACK) {
+            MIN_DIST_CHECK_ATTACK && !win->is_god_mode) {
         win->entities.player->life -= attack->enemy_attack->life_to_rm;
         remove_wall(&win->entities.wall, attack);
         return false;

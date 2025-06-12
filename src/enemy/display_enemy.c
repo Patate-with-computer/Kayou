@@ -9,7 +9,7 @@
 #include <string.h>
 #include <math.h>
 #include "enemy.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "map.h"
 #include "player.h"
 #include "texture_pack.h"
@@ -38,22 +38,10 @@ static void set_vertext(sfVertex vertex[4], game_assets_t *win,
     print_life_str(win, enemy, pr);
 }
 
-static void set_enemy_shader(game_assets_t *win, wall_t *enemy)
-{
-    float angle = get_wall_visibility_angle(enemy, win->entities.player,
-        win->entities.wall);
-    bool visble = angle != -1;
-
-    sfShader_setFloatUniform(win->csfml.shadow, "dist", enemy->distance);
-    sfShader_setBoolUniform(win->csfml.shadow, "is_shadow", win->shadow_room);
-    sfShader_setBoolUniform(win->csfml.shadow, "is_visible", visble);
-    sfShader_setFloatUniform(win->csfml.shadow, "light_angle", angle);
-}
-
 static void draw(game_assets_t *win, wall_t *enemy)
 {
     sfRenderStates st = {sfBlendAlpha, sfTransform_Identity,
-        pack(enemy->texture, win->text_pack), win->csfml.shadow};
+        pack(enemy->texture, win->text_pack), NULL};
 
     sfVertexArray_setPrimitiveType(win->csfml.quad, sfQuads);
     sfRenderTexture_drawVertexArray(win->csfml.rend_text,
@@ -82,7 +70,6 @@ void display_enemy(game_assets_t *win, wall_t *enemy)
 
     if (enemy == NULL)
         return;
-    move_an_enemy(win, enemy);
     if (win->shadow_room && enemy->distance >= MAX_SHADOW)
         return;
     pt = project_pt(win, enemy->pos1, &enemy->printbale);
@@ -90,7 +77,6 @@ void display_enemy(game_assets_t *win, wall_t *enemy)
     if (enemy->printbale != PRINTABLE)
         return;
     sfVertexArray_clear(win->csfml.quad);
-    set_enemy_shader(win, enemy);
     set_vertext(vertex, win, pt, enemy);
     for (size_t i = 0; i < 4; ++i)
         sfVertexArray_append(win->csfml.quad, vertex[i]);

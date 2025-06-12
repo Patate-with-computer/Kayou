@@ -16,7 +16,7 @@
     #define SIZE_CIRCLE_CURSOR 15.0f
     #define SIZE_TXT_CURSOR 50
 #ifndef WINDOW_MANAGE_H
-    #include "window_manage.h"
+    #include "window/window_manage.h"
 #endif
 
 typedef struct game_assets_s game_assets_t;
@@ -44,5 +44,6 @@ cursor_bar_t **init_cursors(void);
 cursor_bar_t **free_cursors(cursor_bar_t **cursor);
 void display_cursor(game_assets_t *win, size_t nb);
 void move_circle(game_assets_t *win, size_t nb);
+void move_circle_joystick(game_assets_t *win, size_t nb);
 
 #endif

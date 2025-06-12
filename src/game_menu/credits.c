@@ -9,7 +9,7 @@
 #include <SFML/Graphics.h>
 #include <stdlib.h>
 #include <string.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "buttons.h"
 #include "event_manage.h"
 #include "texture_pack.h"

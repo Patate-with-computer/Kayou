@@ -10,7 +10,7 @@
     #include <SFML/Graphics.h>
     #include <stdbool.h>
     #include <stdio.h>
-    #include "type.h"
+    #include "wolf/type.h"
     #define NB_BUTTON 17
     #define SIZE_X (1200 / 3)
     #define SIZE_Y (750 / 5)
@@ -20,8 +20,8 @@
     #define POS_Y_SAVE 300
     #define CREDITS_TXT "Press any key to echap"
 
-typedef struct game_assets_s game_assets_t;
-typedef struct texture_pack_s texture_pack_t;
+// other struct
+    #include "wolf/struct.h"
 
 typedef struct button_info_s {
     int pos_x_text;
@@ -45,7 +45,7 @@ enum {
 };
 
 #ifndef WINDOW_MANAGE_H
-    #include "window_manage.h"
+    #include "window/window_manage.h"
 #endif
 
 static const button_info_t button_array[NB_BUTTON] =

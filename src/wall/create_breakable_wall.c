@@ -7,7 +7,7 @@
 
 #include <math.h>
 #include "map.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "player.h"
 #include "texture_pack.h"
 

@@ -8,7 +8,7 @@
 #include <string.h>
 #include "player.h"
 #include "save_manage.h"
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "file_manage.h"
 
 void write_a_save(game_assets_t *assets, size_t nb_save)
@@ -28,6 +28,7 @@ void write_a_save(game_assets_t *assets, size_t nb_save)
     save.player_pos = pl->pos;
     save.player_life = pl->life;
     save.nb_weapon = pl->weapon_name;
+    save.timer = assets->timer;
     memcpy(save.get_weapon, pl->get_weapon, NB_WEAPON * sizeof(bool));
     (void)fwrite(&save, sizeof(save_manage_t), 1, fd);
     (void)fclose(fd);

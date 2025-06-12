@@ -6,7 +6,7 @@
 */
 
 #include <math.h>
-#include "window_manage.h"
+#include "window/window_manage.h"
 #include "player.h"
 #include "map.h"
 #include "enemy.h"
@@ -50,18 +50,42 @@ void set_circle(sfCircleShape *circle, float radius,
     sfCircleShape_setPosition(circle, pos);
 }
 
-static void print_circles(game_assets_t *win, sfRenderStates st)
+static void print_item_minimap(game_assets_t *win, wall_t *wall,
+    sfRenderStates st)
+{
+    sfVector2f pl_pos = win->entities.player->pos;
+
+    if (wall->object != IS_ITEM)
+        return;
+    if (wall->item->pnj_txt == NULL || wall->distance >= SIZE_MINIMAP ||
+        (win->shadow_room && wall->distance >= MAX_DIST_SHADOW))
+        return;
+    set_circle(win->csfml.circle, SIZE_ENEMY_MMP,
+        (sfVector2f){wall->pos1.x - pl_pos.x, wall->pos1.y - pl_pos.y},
+        (sfColor){50, 150, 200, 255});
+    sfRenderWindow_drawCircleShape(win->csfml.win, win->csfml.circle, &st);
+}
+
+static void print_player_minimap(game_assets_t *win, sfRenderStates st)
 {
     sfVector2f p0 = {0.0, 0.0};
     sfCircleShape *circle = win->csfml.circle;
-    sfVector2f pl_pos = win->entities.player->pos;
-    float radius[2] = {SIZE_ENEMY_MMP, SIZE_ATK_MMP};
 
     set_circle(circle, SIZE_MINIMAP + 8.0, p0, back_color);
     sfRenderWindow_drawCircleShape(win->csfml.win, circle, &st);
     set_circle(circle, SIZE_PLAYER, p0, player_color);
     sfRenderWindow_drawCircleShape(win->csfml.win, circle, &st);
+}
+
+static void print_circles(game_assets_t *win, sfRenderStates st)
+{
+    sfCircleShape *circle = win->csfml.circle;
+    sfVector2f pl_pos = win->entities.player->pos;
+    float radius[2] = {SIZE_ENEMY_MMP, SIZE_ATK_MMP};
+
+    print_player_minimap(win, st);
     for (wall_t *wall = win->entities.wall; wall != NULL; wall = wall->next) {
+        print_item_minimap(win, wall, st);
         if (wall->object != IS_ENEMY && wall->object != IS_ATTACK)
             continue;
         if (wall->distance >= SIZE_MINIMAP ||

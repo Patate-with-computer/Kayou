@@ -11,7 +11,7 @@
     #include <stdbool.h>
     #define SIZE_PRINT 50.0
     #define SCALE(a) (SIZE_PRINT / a)
-    #include "type.h"
+    #include "wolf/type.h"
 
 typedef struct texture_pack_s texture_pack_t;
 

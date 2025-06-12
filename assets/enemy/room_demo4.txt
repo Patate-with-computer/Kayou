@@ -1,0 +1,4 @@
+224:50-50.0:mob.png
+192:50-50.0:enemy.png
+224:50-70.0:tentacule.png
+192:50-100.0:wood.png

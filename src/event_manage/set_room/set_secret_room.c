@@ -22,6 +22,7 @@ void set_secret(game_assets_t *win, sfVector2f reset)
         return;
     free_wall(win->entities.wall);
     win->entities.wall = tmp;
+    win->is_brume = false;
     win->shadow_room = false;
     if (reset.x != RESET || reset.y != RESET)
         win->entities.player->pos = reset;
