@@ -46,13 +46,13 @@ make help
 - *You can compile this binary using:*
 
 ```bash
-./wolf3d
+./kayou
 # --> to start playing our game.
 
-./wolf3d godmode
+./kayou godmode
 # --> to play the game on god-mode (can't take any damage).
 
-./wolf3d demo
+./kayou demo
 # --> to launch the demo of the game (tutorial).
 ```
 
@@ -129,7 +129,7 @@ make help
 
 **You can find our game lore right here:**
 
-- [Wolf3D's Lore](./Wolf3D_lore/)
+- [Kayou's Lore](./Kayou_lore/)
 
 ## Authors
 

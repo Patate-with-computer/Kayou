@@ -205,7 +205,7 @@ SRC		= 	$(addprefix $(SRC_DIR)/window_manage/, $(WINDOW_MANAGE))		\
 			$(addprefix $(SRC_DIR)/infos/, $(INFOS))						\
 			$(SRC_DIR)/$(MAIN)
 
-NAME		=	wolf3d
+NAME		=	kayou
 
 CPPFLAGS	+=	-iquote./include/ -Wall -Wextra
 
