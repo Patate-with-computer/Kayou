@@ -1,4 +1,4 @@
-# English version of Wolf3D's lore:
+# English version of Kayou's lore:
 
 ## Story:
 
@@ -12,22 +12,9 @@ Apparently, one of your friends, as well as some civilians, have been lost or ca
 
 Arm yourself. Shoot. Don't back down.
 The world needs you.
-___
-Commands:
-
-ZQSD - Move
-
-R - Change weapon
-
-E - Open magazine
-
-Esc - Go to Menu
-
-A - Interact with pnj / Display/ Exit a text
 
 
-
-# Version en français du lore de Wolf3D:
+# Version en français du lore de Kayou:
 
 ## Histoire:
 
@@ -41,15 +28,3 @@ Apparemment, l'un de vos amis, ainsi que des civils se seraient perdus, où aura
 
 Equipe toi. Tire. Ne recule pas.
 Le monde a besoin de toi.
-___
-Commandes:
-
-ZQSD - Se déplacer
-
-R - Changer d'arme
-
-E - Ouvrir le magasin
-
-Echap - Accéder au Menu
-
-A - Interragir avec les pnj /Afficher/ Quitter un texte
