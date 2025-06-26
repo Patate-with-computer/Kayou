@@ -12,7 +12,7 @@ The languages used are **C** and **CSFML**.
 
 We've used **OpenGL Shading Language (GLSL)**, for the shaders.
 
-![example_video](https://github.com/EpitechPGEPromo2029/G-ING-210-PAR-2-1-wolf3d-tanguy.folliot/blob/main/assets/readme_pictures/game.gif)
+![example_video](https://github.com/Patate-with-computer/Kayou/blob/main/assets/readme_pictures/game.gif)
 
 ## Epitech Warning
 
